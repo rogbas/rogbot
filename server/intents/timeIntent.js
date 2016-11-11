@@ -2,7 +2,7 @@
 const request = require('superagent');
 
 module.exports.process = function process(intentData, registry, cb) {
-
+ 
     if(intentData.intent[0].value != 'time')
         return cb(new Error(`Expected time intent, got ${intentData.intent[0].value}`));
 
