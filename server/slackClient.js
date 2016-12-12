@@ -21,10 +21,19 @@ function handleOnMessage(message) {
                 return;
             }
             try {
+                console.log(res);
                 if (!res.intent || !res.intent[0] || !res.intent[0].value)
                     throw new Error('Could not extract intent');
 
-                const intent = require('./intents/' + res.intent[0].value + 'Intent');
+                //const intentName = res.intent[0].value.replace(/:.*/i, '');
+                const breakIntent = res.intent[0].value.split(':');
+                // In case we have subIntents => bitcoin:transfer, bitcoin:balance
+                if(breakIntent.length > 1) {
+                    res.intent[0].value = breakIntent[0];
+                    res.intent[0].subIntent = breakIntent[1];
+                }
+
+                const intent = require('./intents/' + breakIntent[0] + 'Intent');
 
                 intent.process(res, registry, function (error, response) {
                     if (error) {
@@ -36,7 +45,7 @@ function handleOnMessage(message) {
                 });
 
             } catch (err) {
-                console.log(error);
+                console.log(err);
                 console.log(res);
                 rtm.sendMessage("Sorry, I don't know what you are talking about", message.channel);
             }
