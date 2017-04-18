@@ -7,22 +7,10 @@ pipeline {
 npm build'''
       }
     }
-    stage('error') {
+    stage('unit test') {
       steps {
-        parallel(
-          "unit test": {
-            timestamps() {
-              sleep 20
-            }
-            
-            
-          },
-          "canary": {
-            timestamps()
-            sleep 20
-            
-          }
-        )
+        timestamps()
+        sleep 20
       }
     }
   }
