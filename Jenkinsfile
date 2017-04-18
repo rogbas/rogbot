@@ -11,11 +11,15 @@ npm build'''
       steps {
         parallel(
           "unit test": {
-            timestamps()
+            timestamps() {
+              sleep 10
+            }
+            
             
           },
           "canary": {
             timestamps()
+            sleep 20
             
           }
         )
