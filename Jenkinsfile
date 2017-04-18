@@ -7,5 +7,19 @@ pipeline {
 npm build'''
       }
     }
+    stage('') {
+      steps {
+        parallel(
+          "Unit Test": {
+            sleep 10
+            
+          },
+          "Canary": {
+            sleep 8
+            
+          }
+        )
+      }
+    }
   }
 }
