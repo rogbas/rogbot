@@ -12,7 +12,7 @@ npm build'''
         parallel(
           "unit test": {
             timestamps() {
-              sleep 10
+              sleep 20
             }
             
             
