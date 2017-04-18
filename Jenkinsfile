@@ -7,11 +7,5 @@ pipeline {
 npm build'''
       }
     }
-    stage('unit test') {
-      steps {
-        timestamps()
-        sleep 20
-      }
-    }
   }
 }
